@@ -14,7 +14,7 @@ export class UsersService {
   }
 
   findAll() {
-    return this.prisma.user.findFirst({ where: { firstName: 'Pravin' } });
+    return this.prisma.user.findMany({ where: { isAdmin: true } });
   }
 
   findOne(id: number) {

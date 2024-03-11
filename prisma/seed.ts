@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { uuid } from "uuidv4";
 // import { uuid } from "uuidv4";
 
 const prisma = new PrismaClient();
@@ -8,15 +9,25 @@ async function main() {
 
     await prisma.user.create({
         data: {
-            // id: uuid(),
+            id: uuid(),
             firstName: 'Pravin',
             lastName: 'Fernando',
-            email: 'pravinfernando3@gmail.com',
+            email: 'pravinfernando4@gmail.com',
             isAdmin: true,
             password: '12345',
             phoneNumber: ''
         }
     })
+
+    // await prisma.product.create({
+    //     data: {
+    //         name: 'Nike Air',
+    //         description: 'Nike Air technology consists of pressurized air inside a tough yet flexible bag and provides more flexibility and spring without compromising structure.',
+    //         price: 500.20,
+    //         qauntity: 5,
+    //         userId: '3d5397c4-3c80-45c5-bb5a-597f81ea5512'
+    //     }
+    // })
 }
 
 main()
