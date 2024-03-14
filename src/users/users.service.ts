@@ -2,15 +2,31 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-// import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
-  // const prisma = new PrismaClient()
   constructor(private prisma: PrismaService) { }
 
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    try {
+      const createUser = {
+        firstName: createUserDto.firstName,
+        lastName: createUserDto.lastName,
+        email: createUserDto.email,
+        phoneNumber: createUserDto.phoneNumber,
+        password: createUserDto.password,
+        isAdmin: createUserDto.isAdmin
+      }
+
+      const user = this.prisma.user.create({
+        data: createUser
+      })
+
+      return user;
+    } catch (err) {
+      console.error("Error creating user:", err);
+      throw new Error("Failed to create user");
+    }
   }
 
   findAll() {
